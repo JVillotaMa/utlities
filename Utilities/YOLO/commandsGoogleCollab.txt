@@ -1,0 +1,14 @@
+pip install ultralytics
+pip install roboflow
+
+from roboflow import Roboflow
+rf = Roboflow(api_key="X")
+project = rf.workspace("X").project("X")
+version = project.version(1)
+dataset = version.download("yolov8")
+
+
+!yolo detect train data=/content/X/data.yaml model=yolov8m.pt epochs=300 imgsz=640 
+!yolo detect val data=/content/X/data.yaml model=/content/runs/detect/train2/weights/best.pt
+
+!yolo detect predict model=/content/runs/detect/train6/weights/best.pt source=/content/X/test/images
